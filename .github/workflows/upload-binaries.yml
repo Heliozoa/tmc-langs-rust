@@ -1,7 +1,6 @@
 name: Upload CLI binaries
 
-on:
-  push
+on: push
 
   windows:
     runs-on: windows-latest
