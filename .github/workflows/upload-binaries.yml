@@ -17,7 +17,7 @@ jobs:
       - name: Build
         run: |
           cargo build -p tmc-langs-cli --release --verbose --target x86_64-unknown-linux-gnu
-          mv target/release/tmc-langs-cli tmc-langs-cli-x86_64-unknown-linux-gnu
+          mv target/x86_64-unknown-linux-gnu/release/tmc-langs-cli tmc-langs-cli-x86_64-unknown-linux-gnu
           gsutil cp tmc-langs-cli-x86_64-unknown-linux-gnu gs://4c5fa153-643f-4d23-84c3-0b70e3bea571
 
   windows:
@@ -31,5 +31,5 @@ jobs:
       - name: Build
         run: |
           cargo build -p tmc-langs-cli --release --verbose --target x86_64-pc-windows-msvc
-          mv target/release/tmc-langs-cli.exe tmc-langs-cli-x86_64-pc-windows-msvc.exe
+          mv target/x86_64-pc-windows-msvc/release/tmc-langs-cli.exe tmc-langs-cli-x86_64-pc-windows-msvc.exe
           gsutil cp tmc-langs-cli-x86_64-pc-windows-msvc.exe gs://4c5fa153-643f-4d23-84c3-0b70e3bea571
