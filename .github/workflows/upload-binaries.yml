@@ -1,0 +1,35 @@
+name: Upload CLI binaries
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+      - name: Build
+        run: |
+          cargo build -p tmc-langs-cli --release --verbose --target x86_64-unknown-linux-gnu
+          mv target/release/tmc-langs-cli tmc-langs-cli-x86_64-unknown-linux-gnu
+          gsutil cp tmc-langs-cli-x86_64-unknown-linux-gnu gs://4c5fa153-643f-4d23-84c3-0b70e3bea571
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+      - name: Build
+        run: |
+          cargo build -p tmc-langs-cli --release --verbose --target x86_64-pc-windows-msvc
+          mv target/release/tmc-langs-cli.exe tmc-langs-cli-x86_64-pc-windows-msvc.exe
+          gsutil cp tmc-langs-cli-x86_64-pc-windows-msvc.exe gs://4c5fa153-643f-4d23-84c3-0b70e3bea571
