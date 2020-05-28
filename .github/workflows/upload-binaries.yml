@@ -2,6 +2,7 @@ name: Upload CLI binaries
 
 on: push
 
+jobs:
   windows:
     runs-on: windows-latest
     steps:
