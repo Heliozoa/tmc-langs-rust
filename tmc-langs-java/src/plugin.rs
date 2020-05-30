@@ -87,7 +87,7 @@ pub trait JavaPlugin: LanguagePlugin {
 
         TestResult {
             name,
-            passed,
+            successful: passed,
             points,
             message,
             exceptions,

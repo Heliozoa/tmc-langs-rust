@@ -30,7 +30,7 @@ impl CheckLog {
                 let exceptions = vec![];
                 test_results.push(TestResult {
                     name: test.description,
-                    passed,
+                    successful: passed,
                     points,
                     message: test.message,
                     exceptions,
