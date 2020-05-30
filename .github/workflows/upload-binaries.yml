@@ -3,6 +3,20 @@ name: Upload CLI binaries
 on: push
 
 jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: tmc-langs
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+      - name: Build
+        run: |
+          cargo build -p tmc-langs-cli --release --verbose
+          mv target/release/tmc-langs-cli tmc-langs-cli-linux
+          gsutil cp tmc-langs-cli-linux gs://4c5fa153-643f-4d23-84c3-0b70e3bea571
+
   windows:
     runs-on: windows-latest
     steps:
@@ -13,8 +27,22 @@ jobs:
           service_account_key: ${{ secrets.GCP_SA_KEY }}
       - name: Build
         run: |
-          cargo build -p tmc-langs-cli --release --verbose --target x86_64-pc-windows-msvc
-          mv target/x86_64-pc-windows-msvc/release/tmc-langs-cli.exe tmc-langs-cli-x86_64-pc-windows-msvc.exe
+          cargo build -p tmc-langs-cli --release --verbose
+          mv target/release/tmc-langs-cli.exe tmc-langs-cli-windows.exe
           $env:python_version=$(python -c 'import sys; print(\".\".join(map(str, sys.version_info[:3])))')
           $env:CLOUDSDK_PYTHON="C:\hostedtoolcache\windows\Python\$env:python_version\x64\python"
-          gsutil cp tmc-langs-cli-x86_64-pc-windows-msvc.exe gs://4c5fa153-643f-4d23-84c3-0b70e3bea571
+          gsutil cp tmc-langs-cli-windows.exe gs://4c5fa153-643f-4d23-84c3-0b70e3bea571
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          project_id: tmc-langs
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+      - name: Build
+        run: |
+          cargo build -p tmc-langs-cli --release --verbose
+          mv target/release/tmc-langs-cli tmc-langs-cli-macos
+          gsutil cp tmc-langs-cli-macos gs://4c5fa153-643f-4d23-84c3-0b70e3bea571
