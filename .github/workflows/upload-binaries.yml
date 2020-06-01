@@ -17,7 +17,7 @@ jobs:
       - name: Build
         run: cargo build -p tmc-langs-cli --release --verbose
       - name: Deploy
-        run: gsutil cp target/release/tmc-langs-cli gs://${{ secrets.GCP_BUCKET }}/tmc-langs-rust/tmc-langs-cli-linux-$GITHUB_REF
+        run: gsutil cp target/release/tmc-langs-cli gs://${{ secrets.GCP_BUCKET }}/tmc-langs-rust/tmc-langs-cli-linux-${{ github.event.release.tag_name }}
 
   windows:
     runs-on: windows-latest
@@ -33,7 +33,7 @@ jobs:
         run: |
           $env:python_version=$(python -c 'import sys; print(\".\".join(map(str, sys.version_info[:3])))')
           $env:CLOUDSDK_PYTHON="C:\hostedtoolcache\windows\Python\$env:python_version\x64\python"
-          gsutil cp target/release/tmc-langs-cli.exe gs://${{ secrets.GCP_BUCKET }}/tmc-langs-rust/tmc-langs-cli-windows-$GITHUB_REF.exe
+          gsutil cp target/release/tmc-langs-cli.exe gs://${{ secrets.GCP_BUCKET }}/tmc-langs-rust/tmc-langs-cli-windows-${{ github.event.release.tag_name }}.exe
 
   macos:
     runs-on: macos-latest
@@ -46,4 +46,4 @@ jobs:
       - name: Build
         run: cargo build -p tmc-langs-cli --release --verbose
       - name: Deploy
-        run: gsutil cp target/release/tmc-langs-cli gs://${{ secrets.GCP_BUCKET }}/tmc-langs-rust/tmc-langs-cli-macos-$GITHUB_REF
+        run: gsutil cp target/release/tmc-langs-cli gs://${{ secrets.GCP_BUCKET }}/tmc-langs-rust/tmc-langs-cli-macos-${{ github.event.release.tag_name }}
