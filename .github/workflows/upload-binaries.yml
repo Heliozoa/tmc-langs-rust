@@ -5,45 +5,12 @@ on:
     types:
       - created
 
-jobs:
-  linux:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-      - name: Build
-        run: cargo build -p tmc-langs-cli --release --verbose
-      - name: Deploy
-        run: gsutil cp target/release/tmc-langs-cli gs://${{ secrets.GCP_BUCKET }}/tmc-langs-rust/tmc-langs-cli-linux-${{ github.event.release.tag_name }}
+env:
+  TAG: ${{ github.event.release.tag_name }}
 
-  windows:
+jobs:
+  tag:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-      - name: Build
-        run: cargo build -p tmc-langs-cli --release --verbose
-      - name: Deploy
-        run: |
-          $env:python_version=$(python -c 'import sys; print(\".\".join(map(str, sys.version_info[:3])))')
-          $env:CLOUDSDK_PYTHON="C:\hostedtoolcache\windows\Python\$env:python_version\x64\python"
-          gsutil cp target/release/tmc-langs-cli.exe gs://${{ secrets.GCP_BUCKET }}/tmc-langs-rust/tmc-langs-cli-windows-${{ github.event.release.tag_name }}.exe
-
-  macos:
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-      - name: Build
-        run: cargo build -p tmc-langs-cli --release --verbose
-      - name: Deploy
-        run: gsutil cp target/release/tmc-langs-cli gs://${{ secrets.GCP_BUCKET }}/tmc-langs-rust/tmc-langs-cli-macos-${{ github.event.release.tag_name }}
+      - name: try
+        run: echo $Env:TAG
