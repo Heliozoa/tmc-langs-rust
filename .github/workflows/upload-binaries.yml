@@ -1,6 +1,9 @@
 name: Upload CLI binaries
 
-on: push
+on:
+  release:
+    types:
+      - created
 
 jobs:
   linux:
