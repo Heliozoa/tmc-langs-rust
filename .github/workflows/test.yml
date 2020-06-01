@@ -1,14 +1,31 @@
 name: Run tests
 
-on: push
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
-  tests:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-
-    runs-on: ${{ matrix.os }}
+  linux:
+    runs-on: ubuntu-latest
     steps:
-      - name: Test
-        run: cargo test
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: |
+          sudo apt install -y check valgrind  # required for make plugin
+          RUST_LOG=debug cargo test --verbose
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: RUST_LOG=debug cargo test --verbose # TODO: install valgrind and check?
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run tests
+        run: RUST_LOG=debug cargo test --verbose # TODO: install valgrind and check?
