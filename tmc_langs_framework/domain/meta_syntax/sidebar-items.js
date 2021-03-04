@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["MetaString",""]],"struct":[["MetaSyntaxParser","Parses a given text file into an iterator of `MetaString`s"]]});

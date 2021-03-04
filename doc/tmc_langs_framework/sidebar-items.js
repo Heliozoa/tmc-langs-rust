@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["domain","domain documentation"]],"trait":[["LanguagePlugin","LanguagePlugin documentation"]]});

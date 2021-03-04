@@ -1,3 +1,6 @@
 (function() {var implementors = {};
-implementors["same_file"] = [{"text":"impl <a class=\"trait\" href=\"https://doc.rust-lang.org/nightly/std/sys/unix/ext/io/trait.IntoRawFd.html\" title=\"trait std::sys::unix::ext::io::IntoRawFd\">IntoRawFd</a> for <a class=\"struct\" href=\"same_file/struct.Handle.html\" title=\"struct same_file::Handle\">Handle</a>","synthetic":false,"types":["same_file::Handle"]}];
+implementors["mio"] = [{"text":"impl IntoRawFd for Sender","synthetic":false,"types":[]},{"text":"impl IntoRawFd for Receiver","synthetic":false,"types":[]},{"text":"impl IntoRawFd for TcpListener","synthetic":false,"types":[]},{"text":"impl IntoRawFd for TcpSocket","synthetic":false,"types":[]},{"text":"impl IntoRawFd for TcpStream","synthetic":false,"types":[]},{"text":"impl IntoRawFd for UdpSocket","synthetic":false,"types":[]},{"text":"impl IntoRawFd for UnixDatagram","synthetic":false,"types":[]},{"text":"impl IntoRawFd for UnixListener","synthetic":false,"types":[]},{"text":"impl IntoRawFd for UnixStream","synthetic":false,"types":[]}];
+implementors["nix"] = [{"text":"impl IntoRawFd for PtyMaster","synthetic":false,"types":[]}];
+implementors["same_file"] = [{"text":"impl IntoRawFd for Handle","synthetic":false,"types":[]}];
+implementors["socket2"] = [{"text":"impl IntoRawFd for Socket","synthetic":false,"types":[]}];
 if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()
