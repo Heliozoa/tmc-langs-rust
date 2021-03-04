@@ -22,8 +22,9 @@ jobs:
           sudo apt update
           sudo apt install -y gcc-multilib # required to build for 32-bit arch
       - name: Cargo build
+        working-directory: tmc-langs-cli
         run: |
-          cargo build -p tmc-langs-cli --release --verbose --features server
+          cargo build --release --verbose --features server
       - name: Deploy
         run: gsutil cp target/${{ matrix.target }}/release/tmc-langs-cli gs://${{ secrets.GCP_BUCKET }}/tmc-langs-rust/tmc-langs-cli-server-$TAG
 
