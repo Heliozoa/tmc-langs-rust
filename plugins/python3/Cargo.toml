@@ -22,4 +22,4 @@ hex = "0.4"
 [dev-dependencies]
 simple_logger = "1"
 tempfile = "3"
-zip = "0.5"
+zip = { version = "0.5", default-features = false, features = ["deflate"] }
