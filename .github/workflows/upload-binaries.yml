@@ -7,7 +7,6 @@ on:
 
 env:
   TAG: ${{ github.event.release.tag_name }} # had some issue using this directly on windows
-  ACCEPT_EULA: Y # required for upgrade on ubuntu (msodbcsql17)
 
 jobs:
   linux:
@@ -24,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -f # try to fix any broken packages
+          sudo apt remove -f # try to fix any broken packages
           sudo apt install -y gcc-5-multilib gcc-multilib # required to build for 32-bit arch
       - name: Cargo build
         run: |
