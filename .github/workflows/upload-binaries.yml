@@ -23,8 +23,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt remove -f # try to fix any broken packages
-          sudo apt install -y gcc-5-multilib gcc-multilib # required to build for 32-bit arch
+          sudo apt install -y libx32gcc-5-dev lib32gcc-5-dev gcc-5-multilib gcc-multilib # required to build for 32-bit arch
       - name: Cargo build
         run: |
           rustup target add i686-unknown-linux-gnu
