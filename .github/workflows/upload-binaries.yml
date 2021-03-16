@@ -24,7 +24,8 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt upgrade
+          sudo ACCEPT_EULA=Y apt install msodbcsql17 # required to upgrade, very cool!
+          sudo apt upgrade # required to install gcc-multilib
           sudo apt install -y gcc-multilib # required to build for 32-bit arch
       - name: Cargo build
         run: |
