@@ -1,16 +1,6 @@
 [workspace]
 members =[
-    "tmc-client",
-    "tmc-langs",
-    "tmc-langs-cli",
     "tmc-langs-framework",
-    "tmc-langs-plugins",
     "tmc-langs-util",
-
-    "plugins/csharp",
-    "plugins/java",
-    "plugins/make",
-    "plugins/notests",
-    "plugins/python3",
     "plugins/r",
 ]

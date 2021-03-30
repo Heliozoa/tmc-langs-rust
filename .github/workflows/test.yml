@@ -43,10 +43,6 @@ jobs:
           dotnet-version: "5.0.x"
       - name: Diagnostics
         run: "gci env:"
-      - name: Install tmc-r-tester
-        run: |
-          Rscript -e 'install.packages(c("testthat", "jsonlite", "R.utils"))'
-          Rscript -e 'install.packages("plugins/r/tests/tmcRtestrunner", repos=NULL, type="source")'
       - name: Build test binary
         run: cargo test --no-run --verbose
       - name: Run tests
@@ -59,10 +55,6 @@ jobs:
       - uses: actions/setup-dotnet@v1
         with:
           dotnet-version: "5.0.x"
-      - name: Install tmc-r-tester
-        run: |
-          Rscript -e 'install.packages(c("testthat", "jsonlite", "R.utils"))'
-          Rscript -e 'install.packages("plugins/r/tests/tmcRtestrunner", repos=NULL, type="source")'
       - name: Build test binary
         run: cargo test --no-run --verbose
       - name: Run tests
